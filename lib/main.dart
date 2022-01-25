@@ -1,3 +1,5 @@
+import 'dart:ui';
+
 import 'package:drawermenu/models/menu_item.dart';
 import 'package:drawermenu/screens/about_us.dart';
 import 'package:drawermenu/screens/help.dart';
@@ -8,6 +10,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_zoom_drawer/flutter_zoom_drawer.dart';
 import 'package:drawermenu/screens/payment_page.dart';
 import 'package:drawermenu/screens/menu_page.dart';
+import 'package:drawermenu/utils/constants.dart';
 void main() {
   runApp(const MyApp());
 }
@@ -18,9 +21,14 @@ class MyApp extends StatelessWidget {
   // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
-    return const MaterialApp(
+    double screenWidth = window.physicalSize.width;
+    return  MaterialApp(
       debugShowCheckedModeBanner: false,
-      home: MyHomePage()
+      home: const MyHomePage(),
+      theme:  ThemeData(
+        primaryColor: colorWhite,
+        textTheme: screenWidth<500?textThemeSmall:textThemeDefault, 
+      )
     );
   }
 }
@@ -62,7 +70,8 @@ class _MyHomePageState extends State<MyHomePage> {
           onSelectedItem:(item){
             setState(()=>currentItem=item);
             ZoomDrawer.of(context)!.close();
-          }
+          },
+          
         )
     ),
 
