@@ -71,7 +71,7 @@ class _MyHomePageState extends State<MyHomePage> {
   Widget getScreen(){
     switch (currentItem) {
       case MenuItems.payment:
-          return const PaymentPage();
+          return  PaymentPage();
       case MenuItems.notifications:
           return const Notifications();
       case MenuItems.promos:
