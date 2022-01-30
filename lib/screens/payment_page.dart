@@ -54,57 +54,70 @@ class PaymentPage extends StatelessWidget{
                   Card(
                     margin: const EdgeInsets.all(1),
                     color: Colors.white,
-                    shadowColor: Colors.pinkAccent,
+                    shadowColor: Colors.grey,
                     child: 
-                      ListTile(
-                      title: Text(fruitData[index].name, style: themeData.textTheme.headline3,),
-                      subtitle:
-                        SizedBox(
-                          width: 100,
-                          height: 100,
-                          child: 
-                            Row(
-                              crossAxisAlignment: CrossAxisAlignment.center,
-                              children: [ 
-                                const SizedBox(
-                                  width: 10,
+                     GestureDetector(
+                       child:  
+                       Container(
+                         margin: const EdgeInsets.symmetric(horizontal: 20, vertical: 10),
+                         child: Column(
+                           children:[ 
+                             Row(
+                               children: [
+                              Text(
+                                fruitData[index].name +'   ',
+                                style: themeData.textTheme.headline3
                                 ),
-                                  Image.network(
-                                    fruitData[index].imageUrl,
-                                    width: 100,
-                                    height: 150,
-                                ),
-                                const SizedBox(
-                                  width: 10,
-                                ),
-                                Image.network(
-                                    fruitData[index].imageUrl,
-                                    width: 100,
-                                    height: 150,
-                                ),
-                                const SizedBox(
-                                  width: 20,
-                                ),
-                                Image.network(
-                                    fruitData[index].imageUrl,
-                                    width: 100,
-                                    height: 150,
-                                )
-                            ],
-                          ),
-                          ),
-                      onTap: (){
+                                const Icon(Icons.play_circle_fill_outlined),
+                             ]
+                             ),
+                             const SizedBox(
+                               height: 10,
+                             ),
+                              DisplayPicture(imageUrl: fruitData[index].imageUrl)
+                             ]
+                           )
+                       ),
+                    onTap: (){
                         Navigator.of(context).push(
                           MaterialPageRoute(
                             builder: (context)=>FruitDetail( fruitDataModel: fruitData[index],)
                             )
                         );
                       },
-                    ),
+                    )
                       ),
                 );
           }
         ),
   );
   }
+  
+}
+//displaying 3 images 
+class DisplayPicture extends StatelessWidget{
+  final String imageUrl;
+
+  const DisplayPicture({Key? key, required this.imageUrl}) : super(key: key);
+  
+  @override
+  Widget build(BuildContext context) =>
+       Row(
+          crossAxisAlignment: CrossAxisAlignment.center,
+          children: <Widget>[ 
+            for (int i=0; i<3; i++)
+              Row(
+                children:  [
+                  const SizedBox(
+                    width: 1,
+                  ),
+                  Image.network(
+                    imageUrl,
+                    width: 110,
+                    height: 100,
+                )
+                ],
+              )            
+        ],
+      );     
 }
