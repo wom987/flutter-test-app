@@ -7,11 +7,13 @@ import 'package:drawermenu/screens/notifications.dart';
 import 'package:drawermenu/screens/promos.dart';
 import 'package:drawermenu/screens/rate_us.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:flutter_zoom_drawer/flutter_zoom_drawer.dart';
 import 'package:drawermenu/screens/payment_page.dart';
 import 'package:drawermenu/screens/menu_page.dart';
 import 'package:drawermenu/utils/constants.dart';
-void main() {
+Future main() async {
+  await dotenv.load(fileName: '.env');
   runApp(const MyApp());
 }
 
@@ -80,7 +82,7 @@ class _MyHomePageState extends State<MyHomePage> {
   Widget getScreen(){
     switch (currentItem) {
       case MenuItems.payment:
-          return  PaymentPage();
+          return  const PaymentPage();
       case MenuItems.notifications:
           return const Notifications();
       case MenuItems.promos:
